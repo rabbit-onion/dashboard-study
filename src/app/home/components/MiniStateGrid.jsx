@@ -1,8 +1,7 @@
 import React from 'react';
 import MiniState from './MiniState';
-import { stateData } from '@/data/stateData';
 
-const MiniStateGrid = () => {
+const MiniStateGrid = ({ stateData }) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3'>
       {/* {배열이름.map((item, index)=>(반복코드))} */}
