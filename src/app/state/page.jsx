@@ -6,6 +6,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css'; // Font Awesome CSS
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { IoTicket } from 'react-icons/io5';
+import { FaTree } from 'react-icons/fa';
+import { BiSolidLandscape } from 'react-icons/bi';
+import { FaHouseChimney } from 'react-icons/fa6';
 config.autoAddCss = false;
 
 const StatePage = () => {
@@ -38,11 +42,52 @@ const StatePage = () => {
   // ========================================================
   const [isOpen, setIsOpen] = useState(false);
 
+  // 에어비앤비
+  // ==========================================================
+  const sortArr = [
+    { value: '컬처 아이콘', icon: <IoTicket /> },
+    { value: '한적한 시골', icon: <FaTree /> },
+    { value: '최고의 전망', icon: <BiSolidLandscape /> },
+    { value: '한옥', icon: <FaHouseChimney /> },
+  ];
+
+  const [selected, setSelected] = useState(0);
+
+  // =============================================================
   return (
     <div>
       <h2>useState</h2>
       <hr />
 
+      <div>
+        {/* 에어비앤비  */}
+        <div>
+          {/* tab */}
+          <div className='flex gap-5'>
+            {sortArr.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setSelected(index);
+                }}
+                className={`py-2 ${selected === index ? 'bg-primary-20' : ''}`}
+              >
+                {item.icon}
+                {item.value}
+              </button>
+            ))}
+          </div>
+          {/* tab content */}
+          {sortArr.map((item, index) => (
+            <div key={index} className={`w-full p-5 min-h-40 ${selected === index ? 'block' : 'hidden'}`}>
+              {item.value} 내용
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <hr />
+      {/* button 클릭 시 아이콘 변경 */}
       <button
         onClick={() => {
           setIsOpen(!isOpen);
@@ -52,6 +97,7 @@ const StatePage = () => {
       </button>
 
       <hr />
+      {/* button 클릭 시 숫자 증가/감소 */}
       <strong>{number}</strong>
       <button onClick={increase} className='mx-2 w-12 h-8 bg-secondary text-white'>
         증가
@@ -61,7 +107,7 @@ const StatePage = () => {
       </button>
 
       <hr />
-
+      {/* button 클릭 시 이름 변경 */}
       <strong>{name}</strong>
       <button onClick={changeName} className='block w-20 h-10 bg-primary text-white'>
         이름 변경
