@@ -53,12 +53,25 @@ const StatePage = () => {
 
   const [selected, setSelected] = useState(0);
 
+  // useState로 텍스트 변경하기
   // =============================================================
+  const [text, setText] = useState('');
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setText(e.target.value);
+  };
+
   return (
     <div>
       <h2>useState</h2>
       <hr />
 
+      <input type='text' placeholder='안녕하세요.' value={text} onChange={handleChange} className='bg-red-200 my-5' />
+      <p>{text}</p>
+      <br />
+
+      <hr />
       <div>
         {/* 에어비앤비  */}
         <div>
