@@ -1,21 +1,11 @@
 'use client';
 
-import React, { createContext, useContext } from 'react';
-
-// 생성
-const UserContext = createContext();
+import React from 'react';
+import { UserProvider, useUser } from '@/contexts/UserContext';
 
 const User = () => {
-  const userData = {
-    name: '손승완',
-    email: 'email@naver.com',
-    age: '31',
-    location: '서울특별시 서초구',
-  };
-
   return (
-    // 공급
-    <UserContext.Provider value={userData}>
+    <UserProvider>
       <div>
         <h2>사용자 정보</h2>
         <UserProfile />
@@ -24,13 +14,13 @@ const User = () => {
         <hr />
         <UserProfile />
       </div>
-    </UserContext.Provider>
+    </UserProvider>
   );
 };
 
 const UserProfile = () => {
   // 사용
-  const { name, email, age, location } = useContext(UserContext);
+  const { name, email } = useUser();
 
   return (
     <div>
@@ -42,14 +32,14 @@ const UserProfile = () => {
         <dt>이메일</dt>
         <dd>{email}</dd>
       </dl>
-      <UserInfo age={age} location={location} />
+      <UserInfo />
     </div>
   );
 };
 
 const UserInfo = () => {
   // 사용
-  const { age, location } = useContext(UserContext);
+  const { age, location } = useUser();
 
   return (
     <>
